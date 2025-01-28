@@ -1,15 +1,15 @@
 #### Dockerfile = Environment+Dependencies+Source Code
 ################################
 ### Dockerfile 
-- FROM: Specifies the base image to use for the Docker image.
+-**FROM:**Specifies the base image to use for the Docker image.
     Example: FROM ubuntu:20.04
-- ENV: Sets environment variables.
+-**ENV:** Sets environment variables.
  Example: ENV APP_HOME=/usr/src/app APP_PORT=8080
-- LABEL: Adds metadata to the image in the form of key-value pairs.
+-**LABEL:** Adds metadata to the image in the form of key-value pairs.
   Example: LABEL maintainer="you@example.com" version="1.0"
-- USER: Sets the user for the subsequent instructions and the CMD instruction.
+-**USER:** Sets the user for the subsequent instructions and the CMD instruction.
   Example: USER root
-- ARG: Defines a variable that users can pass at build-time to the builder with the docker build command.
+-**ARG:** Defines a variable that users can pass at build-time to the builder with the docker build command.
   Example: 
 ```sh
            FROM eclipse-temurin:17-jdk
@@ -18,25 +18,25 @@
            COPY target/index.html /tmp/index.html
            ENTRYPOINT ["java","-jar","/tmp/app.jar"]
 ```
-- WORKDIR: Sets the working directory for subsequent instructions.
+- **WORKDIR:** Sets the working directory for subsequent instructions.
   Example: WORKDIR $APP_HOME
-- COPY:  Copies files or directories from the host to the container.
+- **COPY:**  Copies files or directories from the host to the container.
   Example: COPY package.json ./ COPY . .
-- ADD:  Copies files from a URL or tar archives and automatically extracts them.
+- **ADD:**  Copies files from a URL or tar archives and automatically extracts them.
   Example: ADD https://raw.githubusercontent.com/user/repo/branch/file.txt /usr/src/app/file.txt
-- RUN:  Executes a command during the image build process.
+- **RUN:**  Executes a command during the image build process.
   Example: RUN apt-get update && apt-get install -y curl git && rm -rf /var/lib/apt/lists/*
-- VOLUME:  Creates a mount point with the specified path and marks it as holding externally mounted volumes.
+- **VOLUME:**  Creates a mount point with the specified path and marks it as holding externally mounted volumes.
   Example: VOLUME ["/data"]
-- EXPOSE: Informs Docker that the container listens on the specified network ports at runtime.
+- **EXPOSE:** Informs Docker that the container listens on the specified network ports at runtime.
   Example: EXPOSE $APP_PORT
-- CMD: Provides the command to run within the container when it starts.
+- **CMD:** Provides the command to run within the container when it starts.
   Example: CMD ["node", "app.js"]
-- ENTRYPOINT: Configures a container that will run as an executable.
+- **ENTRYPOINT:** Configures a container that will run as an executable.
  Example: ENTRYPOINT ["docker-entrypoint.sh"]
-- HEALTHCHECK: Informs Docker on how to test the container to check that it is still working.
+- **HEALTHCHECK:** Informs Docker on how to test the container to check that it is still working.
  Example: HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhost:$APP_PORT/ || exit 1
-- STOPSIGNAL: Sets the system call signal that will be sent to the container to exit.
+- **STOPSIGNAL:** Sets the system call signal that will be sent to the container to exit.
  Example: STOPSIGNAL SIGTERM
 
 ###################################################################################
