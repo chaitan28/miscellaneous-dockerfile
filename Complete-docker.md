@@ -85,8 +85,8 @@ FROM ubuntu
 CMD ["echo", "Hello, world!"]
 root@ip-172-31-37-89:~/dockerfile/cmd# docker run cmd echo hello new
 hello, new
+The container will then execute the command echo "hello, new" instead of the default echo "Hello, World!"
 ```
-   The container will then execute the command echo "hello, new" instead of the default echo "Hello, World!"<br>
 - The ENTRYPOINT instruction sets the command that will be executed when the container starts, and it cannot be easily overridden by docker run. 
    However, you can pass additional arguments to it when running the container.<br>
 ```sh
@@ -97,10 +97,11 @@ root@ip-172-31-37-89:~/dockerfile/entry# docker run entry world
 Hello world
 ```
 
-&& Best Practices for Docker image creation/Best Practice Writing a Dockerfile 
+#### Best Practices for Docker image creation/Best Practice Writing a Dockerfile <br>
 
-.  Use specific tags:                   Avoid latest to ensure predictable builds and compatibility.
-.  Optimize image size:                 Use minimal base images and multi-stage builds to reduce the image footprint.
+-  Use specific tags:                   Avoid latest to ensure predictable builds and compatibility. <br>
+-  Optimize image size:                 Use minimal base images and multi-stage builds to reduce the image footprint. <br>
+```sh
                                            ## Mutlistage Dockerfile ###
                                              ###stage1: Build######
                                             FROM schoolofdevops/maven:spring AS build
@@ -113,11 +114,12 @@ Hello world
                                             COPY --from=build /app/target/*.jar /run/petclinic.jar
                                             EXPOSE 8080
                                             CMD ["java","-jar","petclinic.jar"]
-                                        Explaination: 
-                                           . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file 
-                                           . stage2:   In copy, your copying jar file from build stage to the dest /run dir inside the container 
-                                                      . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.
-                                                      . The result of stage2 will be your dockerimage.
+```
+                  #### Explaination: 
+                  . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file 
+                  . stage2:   In copy, your copying jar file from build stage to the dest /run dir inside the container 
+                            . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.
+                            . The result of stage2 will be your dockerimage.
       
                                           
                                         ## Mutlistage Dockerfile ###
@@ -136,18 +138,17 @@ Hello world
                                         Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. 
                                                      . This approach keeps the final image lean and efficient.
 
-.  Exclude unnecessary files:           Use .dockerignore to avoid sending unneeded files in the building the image.
-                                        # Ignore Git-related files & log files
+-  Exclude unnecessary files:           Use .dockerignore to avoid sending unneeded files in the building the image.
+  #### Ignore Git-related files & log files
                                               .git/
                                               .gitignore
                                               *.log
-.  Keep images secure:                  Regularly update base images to include the latest security patches.
-.  Scan for vulnerabilities:            Use tools like Trivy or Docker built-in scan before deployment to ensure security compliance.
-. Try to avoid RUN apt get update -y or yum update -y in the Dockerfile.
-. File which so often change should be written at the end of the file. # example : COPY target/index.html /tmp/index.html
+-  Keep images secure:                  Regularly update base images to include the latest security patches.
+-  Scan for vulnerabilities:            Use tools like Trivy or Docker built-in scan before deployment to ensure security compliance.
+-  Try to avoid RUN apt get update -y or yum update -y in the Dockerfile.
+-  File which so often change should be written at the end of the file. # example : COPY target/index.html /tmp/index.html
 
 
-###################################################################################
 ### Dockerfile for Python FrameWork
 FROM python:3.8-slim                         # Specifies the base image with Python 3.8.  base image will underlying environment in which your application will run               
 WORKDIR /app                                 # Sets the working directory inside the container to /app.
