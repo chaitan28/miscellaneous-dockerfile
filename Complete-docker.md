@@ -2,11 +2,17 @@
 ################################
 ### Dockerfile 
 - **FROM:** Specifies the base image to use for the Docker image.
+```sh
     Example: FROM ubuntu:20.04
+```
 - **ENV:** Sets environment variables.
+```sh
  Example: ENV APP_HOME=/usr/src/app APP_PORT=8080
+```
 - **LABEL:** Adds metadata to the image in the form of key-value pairs.
+```sh
   Example: LABEL maintainer="you@example.com" version="1.0"
+```
 - **USER:** Sets the user for the subsequent instructions and the CMD instruction.
   Example: USER root
 - **ARG:** Defines a variable that users can pass at build-time to the builder with the docker build command.
