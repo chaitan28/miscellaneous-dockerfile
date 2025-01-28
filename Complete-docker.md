@@ -65,18 +65,19 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhos
 ```sh
  STOPSIGNAL SIGTERM
 ```
-### CMD Command
+## CMD Command
 #### CMD ["executable", "param1", "param2"]:
-
+CMD ["java", "-jar", "app.jar"]
 - executable: This is the command or executable that will run inside the container (e.g., node, python, java, etc.) <br>
 - param1 and param2: These are arguments passed to the executable.<br>
   Executable: java
   The container will invoke the java command, which is the Java runtime.<br>
   Arguments:
-  -jar tells the Java runtime to treat the file at /app.jar as a JAR file and run it.<br>
-  /app.jar is the path to the actual application JAR file.<br>
-  java -jar command to run the application.<br>
-  #### CMD VS ENTRYPOINT 
+  -jar tells the Java runtime to treat the file at app.jar as a JAR file and run it.<br>
+  app.jar is the path to the actual application JAR file.<br>
+  java -jar command to run the java application.<br>
+
+## CMD VS ENTRYPOINT 
 - CMD can easily be overridden when running the container with different commands.<br>
    CMD ["echo", "Hello, World!"]<br>
    docker run myimage echo "Goodbye, World!"<br>
