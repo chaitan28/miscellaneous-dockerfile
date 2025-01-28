@@ -26,26 +26,45 @@
            ENTRYPOINT ["java","-jar","/tmp/app.jar"]
 ```
 - **WORKDIR:** Sets the working directory for subsequent instructions.
-  Example: WORKDIR $APP_HOME
+```sh
+WORKDIR $APP_HOME
+```
 - **COPY:**  Copies files or directories from the host to the container.
-  Example: COPY package.json ./ COPY . .
+```sh
+  COPY package.json ./ COPY . .
+```
 - **ADD:**  Copies files from a URL or tar archives and automatically extracts them.
-  Example: ADD https://raw.githubusercontent.com/user/repo/branch/file.txt /usr/src/app/file.txt
+```sh
+ ADD https://raw.githubusercontent.com/user/repo/branch/file.txt /usr/src/app/file.txt
+```
 - **RUN:**  Executes a command during the image build process.
-  Example: RUN apt-get update && apt-get install -y curl git && rm -rf /var/lib/apt/lists/*
+```sh
+RUN apt-get update && apt-get install -y curl git && rm -rf /var/lib/apt/lists/*
+```
 - **VOLUME:**  Creates a mount point with the specified path and marks it as holding externally mounted volumes.
-  Example: VOLUME ["/data"]
+```sh
+VOLUME ["/data"]
+```
 - **EXPOSE:** Informs Docker that the container listens on the specified network ports at runtime.
-  Example: EXPOSE $APP_PORT
+```sh
+EXPOSE $APP_PORT
+```
 - **CMD:** Provides the command to run within the container when it starts.
-  Example: CMD ["node", "app.js"]
+```sh
+ CMD ["node", "app.js"]
+```
 - **ENTRYPOINT:** Configures a container that will run as an executable.
- Example: ENTRYPOINT ["docker-entrypoint.sh"]
+```sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+```
 - **HEALTHCHECK:** Informs Docker on how to test the container to check that it is still working.
- Example: HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhost:$APP_PORT/ || exit 1
+```sh
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhost:$APP_PORT/ || exit 1
+```
 - **STOPSIGNAL:** Sets the system call signal that will be sent to the container to exit.
- Example: STOPSIGNAL SIGTERM
-
+```sh
+ STOPSIGNAL SIGTERM
+```
 ###################################################################################
 CMD ["executable", "param1", "param2"]:
 
