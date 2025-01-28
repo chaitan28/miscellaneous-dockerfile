@@ -1,7 +1,7 @@
 #### Dockerfile = Environment+Dependencies+Source Code
 ################################
 ### Dockerfile 
-- **FROM:**Specifies the base image to use for the Docker image.
+- **FROM:** Specifies the base image to use for the Docker image.
     Example: FROM ubuntu:20.04
 - **ENV:** Sets environment variables.
  Example: ENV APP_HOME=/usr/src/app APP_PORT=8080
