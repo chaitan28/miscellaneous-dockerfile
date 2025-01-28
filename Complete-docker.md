@@ -102,18 +102,18 @@ Hello world
 -  Use specific tags:                   Avoid latest to ensure predictable builds and compatibility. <br>
 -  Optimize image size:                 Use minimal base images and multi-stage builds to reduce the image footprint. <br>
 ```sh
-                                           ## Mutlistage Dockerfile ###
-                                             ###stage1: Build######
-                                            FROM schoolofdevops/maven:spring AS build
-                                            workdir /app
-                                            COPY ..
-                                            RUN mvn spring-javaformat:apply && \ mvn package -Dskiptests
-                                            ####stage2: deploy ####
-                                            FROM openjdk:8u201-jre-alpine3.9 AS Runtime
-                                            WORKDIR /run
-                                            COPY --from=build /app/target/*.jar /run/petclinic.jar
-                                            EXPOSE 8080
-                                            CMD ["java","-jar","petclinic.jar"]
+                      ## Mutlistage Dockerfile ###
+                        ###stage1: Build######
+                          FROM schoolofdevops/maven:spring AS build
+                          workdir /app
+                          COPY ..
+                          RUN mvn spring-javaformat:apply && \ mvn package -Dskiptests
+                          ####stage2: deploy ####
+                           FROM openjdk:8u201-jre-alpine3.9 AS Runtime
+                           WORKDIR /run
+                           COPY --from=build /app/target/*.jar /run/petclinic.jar
+                           EXPOSE 8080
+                           CMD ["java","-jar","petclinic.jar"]
 #### Explaination: 
   . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file 
   . stage2:   In copy, your copying jar file from build stage to the dest /run dir inside the container 
@@ -170,9 +170,9 @@ CMD ["python", "app.py"]
 - Uses the exec form to specify that the container should run the Python application app.py by default. <br>
 - python app.py is command to run the python script on ubuntu/centos linux machine directly. <br>
                       
-Environment= python:3.8-slim
-Dependencies= install -r requirements.txt 
-Source Code= ./python1 
+Environment= python:3.8-slim<br>
+Dependencies= install -r requirements.txt <br>
+Source Code= ./python1 <br>
 
 ### Dockerfile for Java Framework
 FROM openjdk:8-jdk-alpine                       #  lightweight OpenJDK 8 Alpine-based image, suitable for running Java applications to keep docker image size minimal.
