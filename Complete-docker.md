@@ -87,11 +87,11 @@ CMD ["java", "-jar", "app.jar"]
    However, you can pass additional arguments to it when running the container.<br>
    ENTRYPOINT ["echo", "Hello"]<br>
    docker run <image> <br>
-   output: Hello
+   output: Hello<br>
    docker run <image> world<br>
-   output: hello world
+   output: hello world<br>
    docker run <image> Hero<br>
-   output: hello hero
+   output: hello hero<br>
 
 && Best Practices for Docker image creation/Best Practice Writing a Dockerfile 
 
