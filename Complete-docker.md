@@ -114,12 +114,13 @@ Hello world
                            COPY --from=build /app/target/*.jar /run/petclinic.jar
                            EXPOSE 8080
                            CMD ["java","-jar","petclinic.jar"]
- Explaination: 
-  . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file 
-  . stage2:   In copy, your copying jar file from build stage to the dest /run dir inside the container 
-              . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.
-              . The result of stage2 will be your dockerimage.
 ```
+- Explaination: <br>
+  . stage1:  This stage contains maven build tool which is responsible to generate the Jar File.<br>
+             use are using mvn package command to get the Jar file<br>
+  . stage2:  In copy, your copying jar file from build stage to the dest /run dir inside the container <br>
+              . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.<br>
+              . The result of stage2 will be your dockerimage.<br>
 ```sh                                 
                                         ## Mutlistage Dockerfile ###
                                         # Stage 1: Build
