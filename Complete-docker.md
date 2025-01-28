@@ -65,33 +65,32 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 CMD curl -f http://localhos
 ```sh
  STOPSIGNAL SIGTERM
 ```
-###################################################################################
-CMD ["executable", "param1", "param2"]:
+### CMD Command
+#### CMD ["executable", "param1", "param2"]:
 
-  executable: This is the command or executable that will run inside the container (e.g., node, python, java, etc.).
-  param1 and param2: These are arguments passed to the executable.
+- executable: This is the command or executable that will run inside the container (e.g., node, python, java, etc.) <br>
+- param1 and param2: These are arguments passed to the executable.<br>
   Executable: java
-  The container will invoke the java command, which is the Java runtime.
+  The container will invoke the java command, which is the Java runtime.<br>
   Arguments:
-  -jar tells the Java runtime to treat the file at /app.jar as a JAR file and run it.
-  /app.jar is the path to the actual application JAR file.
-  java -jar command to run the application.
-  ###########################CMD VS ENTRYPOINT########################################
-  . CMD can easily be overridden when running the container with different commands.
-   CMD ["echo", "Hello, World!"]
-  docker run myimage echo "Goodbye, World!"
-  The container will then execute the command echo "Goodbye, World!" instead of the default echo "Hello, World!"
+  -jar tells the Java runtime to treat the file at /app.jar as a JAR file and run it.<br>
+  /app.jar is the path to the actual application JAR file.<br>
+  java -jar command to run the application.<br>
+  #### CMD VS ENTRYPOINT 
+- CMD can easily be overridden when running the container with different commands.<br>
+   CMD ["echo", "Hello, World!"]<br>
+   docker run myimage echo "Goodbye, World!"<br>
+   The container will then execute the command echo "Goodbye, World!" instead of the default echo "Hello, World!"<br>
   
-  . The ENTRYPOINT instruction sets the command that will be executed when the container starts, and it cannot be easily overridden by docker run. 
-  . However, you can pass additional arguments to it when running the container.
-   ENTRYPOINT ["echo", "Hello"]
-   docker run <image>
+- The ENTRYPOINT instruction sets the command that will be executed when the container starts, and it cannot be easily overridden by docker run. 
+   However, you can pass additional arguments to it when running the container. <br>
+   ENTRYPOINT ["echo", "Hello"]<br>
+   docker run <image>   <br>
    output: Hello
-   docker run <image> world
+   docker run <image> world   <br>
    output: hello world
-   docker run <image> Hero
+   docker run <image> Hero   <br>
    output: hello hero
-###########################################################################################3  
 
 && Best Practices for Docker image creation/Best Practice Writing a Dockerfile 
 
