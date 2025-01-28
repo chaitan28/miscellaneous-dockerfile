@@ -220,16 +220,16 @@ EXPOSE 3000
 ```sh
 CMD ["npm", "start"]
 ```                  
-- node app.js command used to start the nodejs  application on the local linux machine. 
-                                         If your application defines a start script in package.json, you can run it using npm start
-                                         >>> package.json 
-                                         > {
+- node app.js command used to start the nodejs  application on the local linux machine.  <br>
+  If your application defines a start script in package.json, you can run it using npm start <br>
+```sh                                        
+                                        package.json 
+                                          {
                                               "scripts": {
                                             "start": "node app.js"
                                             }
                                            }
-
-
+```
 ##################################################################################3
 && To list all files in the directory and display details about myfile.txt, you can use a shell form or exec form in CMD
 
