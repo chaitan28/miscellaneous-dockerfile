@@ -102,13 +102,13 @@ Hello world
 -  Use specific tags:                   Avoid latest to ensure predictable builds and compatibility. <br>
 -  Optimize image size:                 Use minimal base images and multi-stage builds to reduce the image footprint. <br>
 ```sh
-                      ## Mutlistage Dockerfile ###
-                         #stage1: Build #
+                    ## Mutlistage Dockerfile ###
+                         # stage1: Build 
                           FROM schoolofdevops/maven:spring AS build
                           workdir /app
                           COPY ..
                           RUN mvn spring-javaformat:apply && \ mvn package -Dskiptests
-                          #stage2: deploy #
+                        # stage2: Deploy 
                            FROM openjdk:8u201-jre-alpine3.9 AS Runtime
                            WORKDIR /run
                            COPY --from=build /app/target/*.jar /run/petclinic.jar
