@@ -3,7 +3,7 @@
 ### Dockerfile 
 - **FROM:** Specifies the base image to use for the Docker image.
 ```sh
-    Example: FROM ubuntu:20.04
+ FROM ubuntu:20.04
 ```
 - **ENV:** Sets environment variables.
 ```sh
