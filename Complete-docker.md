@@ -1,15 +1,15 @@
 #### Dockerfile = Environment+Dependencies+Source Code
 ################################
 ### Dockerfile 
--**FROM:**Specifies the base image to use for the Docker image.
+- **FROM:**Specifies the base image to use for the Docker image.
     Example: FROM ubuntu:20.04
--**ENV:** Sets environment variables.
+- **ENV:** Sets environment variables.
  Example: ENV APP_HOME=/usr/src/app APP_PORT=8080
--**LABEL:** Adds metadata to the image in the form of key-value pairs.
+- **LABEL:** Adds metadata to the image in the form of key-value pairs.
   Example: LABEL maintainer="you@example.com" version="1.0"
--**USER:** Sets the user for the subsequent instructions and the CMD instruction.
+- **USER:** Sets the user for the subsequent instructions and the CMD instruction.
   Example: USER root
--**ARG:** Defines a variable that users can pass at build-time to the builder with the docker build command.
+- **ARG:** Defines a variable that users can pass at build-time to the builder with the docker build command.
   Example: 
 ```sh
            FROM eclipse-temurin:17-jdk
