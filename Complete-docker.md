@@ -149,26 +149,18 @@ Hello world
 
 ### Dockerfile for Python FrameWork
 ```sh
- FROM python:3.8-slim  
+ FROM python:3.8-slim 
+ WORKDIR /app  
+ COPY ./python1 /app 
+ RUN pip install -r requirements.txt  
+ CMD ["python", "app.py"] 
 ```
- - Specifies the base image with Python 3.8.  base image will underlying environment in which your application will run    
-```sh     
-WORKDIR /app 
-```                               
- - Sets the working directory inside the container to /app
-```sh
-COPY ./python1 /app 
-```                        
-- Copies the content of the local directory /python1 on the host machine to the containers working directory.
-```sh
-RUN pip install -r requirements.txt   
-```       
+ - Specifies the base image with Python 3.8.  base image will underlying environment in which your application will run                                  
+ - Sets the working directory inside the container to /app                    
+- Copies the content of the local directory /python1 on the host machine to the containers working directory.     
 - Installs Python dependencies listed in requirements.txt.
-```sh
-CMD ["python", "app.py"]          
-``` 
-- Uses the exec form to specify that the container should run the Python application app.py by default. <br>
-- python app.py is command to run the python script on ubuntu/centos linux machine directly. <br>
+- Uses the exec form to specify that the container should run the Python application app.py by default. 
+- python app.py is command to run the python script on ubuntu/centos linux machine directly. 
                       
 Environment= python:3.8-slim<br>
 Dependencies= install -r requirements.txt <br>
@@ -189,31 +181,19 @@ CMD ["java", "-jar", "/app.jar"]
 ### Dockerfile for Nodejs Framework
 ```sh
 FROM node:14 
-```                          
-- This specifies the base image. We are  using the official Node.js 14 image here. It includes Node.js and npm pre-installed        
-```sh
 WORKDIR /app
-```                          
-- This sets the working directory inside the container to /app. All subsequent commands will be run from this directory.
-```sh
 COPY package*.json ./
-```                 
-- This copies the package.json and package-lock.json files to the container. These files contain information about the project dependencies
-```sh
-RUN npm install   
-```                     
-- This installs the dependencies listed in package.json inside the container
-```sh
+RUN npm install
 COPY . .
-```                               
-- This copies the rest of your application code (everything in the current directory) into the /app directory inside the container
-```sh
 EXPOSE 3000 
-```                           
-- This can be ingored . because we expose the application in particular port number. By default, all container ports are accessible from the container itself and can be mapped to any port on the host.
-```sh
 CMD ["npm", "start"]
-```                  
+```                          
+- This specifies the base image. We are  using the official Node.js 14 image here. It includes Node.js and npm pre-installed.                             
+- This sets the working directory inside the container to /app. All subsequent commands will be run from this directory.           
+- This copies the package.json and package-lock.json files to the container. These files contain information about the project dependencies                 
+- This installs the dependencies listed in package.json inside the container                          
+- This copies the rest of your application code (everything in the current directory) into the /app directory inside the container                        
+- This can be ingored . because we expose the application in particular port number. By default, all container ports are accessible from the container itself and can be mapped to any port on the host.                 
 - node app.js command used to start the nodejs  application on the local linux machine.  <br>
   If your application defines a start script in package.json, you can run it using npm start <br>
 ```sh                                        
