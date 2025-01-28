@@ -114,7 +114,7 @@ Hello world
                            COPY --from=build /app/target/*.jar /run/petclinic.jar
                            EXPOSE 8080
                            CMD ["java","-jar","petclinic.jar"]
-#### Explaination: 
+ Explaination: 
   . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file 
   . stage2:   In copy, your copying jar file from build stage to the dest /run dir inside the container 
               . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.
@@ -134,7 +134,7 @@ Hello world
                                         COPY --from=build /usr/src/app/build /usr/share/nginx/html
                                         EXPOSE 80
                                         CMD ["nginx", "-g", "daemon off;"]
-                  Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. This approach keeps the final image lean and efficient.
+  Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. This approach keeps the final image lean and efficient.
 ```
 -  Exclude unnecessary files:  Use .dockerignore to avoid sending unneeded files in the building the image.<br>
                                         Ignore Git-related files & log files  <br>
