@@ -136,7 +136,7 @@ Hello world
                                         CMD ["nginx", "-g", "daemon off;"]
                   Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. This approach keeps the final image lean and efficient.
 ```
--  Exclude unnecessary files:  Use .dockerignore to avoid sending unneeded files in the building the image.
+-  Exclude unnecessary files:  Use .dockerignore to avoid sending unneeded files in the building the image.<br>
                                         Ignore Git-related files & log files  <br>
                                               .git/  <br>
                                               .gitignore  <br>
