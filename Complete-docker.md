@@ -7,16 +7,17 @@
 ```
 - **ENV:** Sets environment variables.
 ```sh
- Example: ENV APP_HOME=/usr/src/app APP_PORT=8080
+ ENV APP_HOME=/usr/src/app APP_PORT=8080
 ```
 - **LABEL:** Adds metadata to the image in the form of key-value pairs.
 ```sh
-  Example: LABEL maintainer="you@example.com" version="1.0"
+  LABEL maintainer="you@example.com" version="1.0"
 ```
 - **USER:** Sets the user for the subsequent instructions and the CMD instruction.
-  Example: USER root
+ ```sh
+ USER root
+```
 - **ARG:** Defines a variable that users can pass at build-time to the builder with the docker build command.
-  Example: 
 ```sh
            FROM eclipse-temurin:17-jdk
            ARG JAR_FILE=target/anewtodo*.jar
