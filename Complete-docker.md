@@ -79,7 +79,13 @@ CMD ["java", "-jar", "app.jar"]
 
 ## CMD VS ENTRYPOINT 
 - CMD can easily be overridden when running the container with different commands.<br>
-
+```sh
+root@ip-172-31-37-89:~/dockerfile/cmd# cat Dockerfile
+FROM ubuntu
+CMD ["echo", "Hello, world!"]
+root@ip-172-31-37-89:~/dockerfile/cmd# docker run cmd echo hello new
+hello new
+```
    The container will then execute the command echo "Goodbye, World!" instead of the default echo "Hello, World!"<br>
   
 - The ENTRYPOINT instruction sets the command that will be executed when the container starts, and it cannot be easily overridden by docker run. 
