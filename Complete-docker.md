@@ -116,8 +116,7 @@ Hello world
                            CMD ["java","-jar","petclinic.jar"]
 ```
 - Explaination: <br>
-  . stage1:  This stage contains maven build tool which is responsible to generate the Jar File.<br>
-             use are using mvn package command to get the Jar file<br>
+  . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file<br>
   . stage2:  In copy, your copying jar file from build stage to the dest /run dir inside the container <br>
               . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.<br>
               . The result of stage2 will be your dockerimage.<br>
