@@ -120,8 +120,7 @@ Hello world
               . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.
               . The result of stage2 will be your dockerimage.
 ```
-      
-                                          
+```sh                                 
                                         ## Mutlistage Dockerfile ###
                                         # Stage 1: Build
                                         FROM node:14 AS build
@@ -136,12 +135,12 @@ Hello world
                                         EXPOSE 80
                                         CMD ["nginx", "-g", "daemon off;"]
                   Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. This approach keeps the final image lean and efficient.
-
+```
 -  Exclude unnecessary files:  Use .dockerignore to avoid sending unneeded files in the building the image.
-                                        Ignore Git-related files & log files
-                                              .git/
-                                              .gitignore
-                                              *.log
+                                        Ignore Git-related files & log files  <br>
+                                              .git/  <br>
+                                              .gitignore  <br>
+                                              *.log  <br>
 -  Keep images secure:                  Regularly update base images to include the latest security patches.
 -  Scan for vulnerabilities:            Use tools like Trivy or Docker built-in scan before deployment to ensure security compliance.
 -  Try to avoid RUN apt get update -y or yum update -y in the Dockerfile.
