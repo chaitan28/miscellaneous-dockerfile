@@ -84,13 +84,13 @@ CMD ["java", "-jar", "app.jar"]
    The container will then execute the command echo "Goodbye, World!" instead of the default echo "Hello, World!"<br>
   
 - The ENTRYPOINT instruction sets the command that will be executed when the container starts, and it cannot be easily overridden by docker run. 
-   However, you can pass additional arguments to it when running the container. <br>
+   However, you can pass additional arguments to it when running the container.<br>
    ENTRYPOINT ["echo", "Hello"]<br>
-   docker run <image>   <br>
+   docker run <image> <br>
    output: Hello
-   docker run <image> world   <br>
+   docker run <image> world<br>
    output: hello world
-   docker run <image> Hero   <br>
+   docker run <image> Hero<br>
    output: hello hero
 
 && Best Practices for Docker image creation/Best Practice Writing a Dockerfile 
