@@ -148,12 +148,27 @@ Hello world
 
 
 ### Dockerfile for Python FrameWork
-FROM python:3.8-slim                         # Specifies the base image with Python 3.8.  base image will underlying environment in which your application will run               
-WORKDIR /app                                 # Sets the working directory inside the container to /app.
-COPY ./python1 /app                          # Copies the content of the local directory /python1 to the containers working directory.
-RUN pip install -r requirements.txt          # Installs Python dependencies listed in requirements.txt.
-CMD ["python", "app.py"]                     # Uses the exec form to specify that the container should run the Python application app.py by default. 
-                                             # python app.py is command to run the python script on ubuntu/centos linux machine directly.
+```sh
+ FROM python:3.8-slim  
+```
+ - Specifies the base image with Python 3.8.  base image will underlying environment in which your application will run    
+```sh     
+WORKDIR /app 
+```                               
+ - Sets the working directory inside the container to /app
+```sh
+COPY ./python1 /app 
+```                        
+- Copies the content of the local directory /python1 to the containers working directory.
+```sh
+RUN pip install -r requirements.txt   
+```       
+- Installs Python dependencies listed in requirements.txt.
+```sh
+CMD ["python", "app.py"]          
+``` 
+- Uses the exec form to specify that the container should run the Python application app.py by default. <br>
+- python app.py is command to run the python script on ubuntu/centos linux machine directly. <br>
                       
 Environment= python:3.8-slim
 Dependencies= install -r requirements.txt 
@@ -165,7 +180,7 @@ WORKDIR /app                                    #  /app directory is created in 
 COPY ./target/*.jar /app/app.jar                #  .jar from the target folder on the local machine is copied inside the /app directory inside the container
 CMD ["java", "-jar", "/app.jar"]                #   This specifies the command to run when the container starts.CMD and ENTRYPOINT only excutes when container starts .
                                                 # java -jar app.jar is command to run the java script on ubuntu/centos linux machine directly.
-###Dockerfile for Nodejs Framework
+### Dockerfile for Nodejs Framework
 
 FROM node:14                           # This specifies the base image. We are  using the official Node.js 14 image here. It includes Node.js and npm pre-installed        
 WORKDIR /app                           # This sets the working directory inside the container to /app. All subsequent commands will be run from this directory.
@@ -202,50 +217,3 @@ RUN apt-get update && apt-get install -y curl && touch /file2.txt
     You don’t need sudo in a Dockerfile, because commands are typically run as the root user by default in a Docker image.
     RUN command in a Dockerfile creates a new layer in the Docker image. This means that frequent RUN commands can increase the size of your image.
 ###########################################################
-# singlestage Dockerfile
-FROM golang:1.23
-WORKDIR /src
-COPY <<EOF ./main.go
-package main
-
-import "fmt"
-
-func main() {
-  fmt.Println("hello, world")
-}
-EOF
-RUN go build -o /bin/hello ./main.go
-CMD ["/bin/hello"]
-
-#Multistage Dockerfile
-FROM golang:1.23
-WORKDIR /src
-COPY <<EOF ./main.go
-package main
-
-import "fmt"
-
-func main() {
-  fmt.Println("hello, world")
-}
-EOF
-RUN go build -o /bin/hello ./main.go
- ####stage2####
-FROM scratch
-COPY --from=0 /bin/hello /bin/hello
-CMD ["/bin/hello"]
-
-#Multistage Dockerfile
-FROM python:3.10-alpine AS build
-WORKDIR /code
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-COPY . .
-
-FROM python:3.10-alpine 
-WORKDIR /code
-COPY --from=build /code /code
-CMD ["flask", "run", "--debug"]
