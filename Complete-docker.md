@@ -177,19 +177,13 @@ Source Code= ./python1 <br>
 ### Dockerfile for Java Framework
 ```sh
 FROM openjdk:8-jdk-alpine  
-```
-- lightweight OpenJDK 8 Alpine-based image, suitable for running Java applications to keep docker image size minimal.
-```sh
 WORKDIR /app
-```                                    
-- /app directory is created in the container and All subsequent commands will be run from this directory.
-```sh
-COPY ./target/*.jar /app/app.jar  
-```              
-- .jar from the target folder on the local machine is copied inside the /app directory inside the container
-```sh
+COPY ./target/*.jar /app/app.jar
 CMD ["java", "-jar", "/app.jar"] 
-```  
+```
+- lightweight OpenJDK 8 Alpine-based image, suitable for running Java applications to keep docker image size minimal.                                  
+- /app directory is created in the container and All subsequent commands will be run from this directory.          
+- .jar from the target folder on the local machine is copied inside the /app directory inside the container 
 - This specifies the command to run when the container starts.CMD and ENTRYPOINT only excutes when container starts .
 - java -jar app.jar is command to run the java script on ubuntu/centos linux machine directly.
 ### Dockerfile for Nodejs Framework
