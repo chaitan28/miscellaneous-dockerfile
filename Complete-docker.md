@@ -230,21 +230,19 @@ CMD ["npm", "start"]
                                             }
                                            }
 ```
-##################################################################################3
-&& To list all files in the directory and display details about myfile.txt, you can use a shell form or exec form in CMD
 
+- **To list all files in the directory and display details about myfile.txt, you can use a shell form or exec form in CMD**
+```sh
 FROM ubuntu:latest
 WORKDIR /app
 COPY . /app
 CMD ["sh", "-c", "ls -la && ls -la myfile.txt"]
-
 CMD ["executable", "param1", "param2"]:
-
-executable: This is the command or executable that will run inside the container (e.g., node, python, java, etc.).
-param1 and param2: These are arguments passed to the executable.
-###########################################################
-RUN apt-get update && apt-get install -y curl && touch /file2.txt  
-    Run instruction in a Dockerfile is used to execute shell commands during the build process of the image.
-    You don’t need sudo in a Dockerfile, because commands are typically run as the root user by default in a Docker image.
-    RUN command in a Dockerfile creates a new layer in the Docker image. This means that frequent RUN commands can increase the size of your image.
-###########################################################
+```
+- executable: This is the command or executable that will run inside the container (e.g., node, python, java, etc.) <br>
+param1 and param2: These are arguments passed to the executable. <br>
+### RUN COMMAND
+- RUN apt-get update && apt-get install -y curl && touch /file2.txt  <br>
+    Run instruction in a Dockerfile is used to execute shell commands during the build process of the image <br>
+    You don’t need sudo in a Dockerfile, because commands are typically run as the root user by default in a Docker image <br>
+    RUN command in a Dockerfile creates a new layer in the Docker image. This means that frequent RUN commands can increase the size of your image<br>
