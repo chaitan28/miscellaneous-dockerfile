@@ -97,7 +97,7 @@ root@ip-172-31-37-89:~/dockerfile/entry# docker run entry world
 Hello world
 ```
 
-#### Best Practices for Docker image creation/Best Practice Writing a Dockerfile <br>
+## Best Practices for Docker image creation/Best Practice Writing a Dockerfile <br>
 
 -  Use specific tags:                   Avoid latest to ensure predictable builds and compatibility. <br>
 -  Optimize image size:                 Use minimal base images and multi-stage builds to reduce the image footprint. <br>
