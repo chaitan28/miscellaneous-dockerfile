@@ -1,0 +1,79 @@
+#!/bin/bash
+sudo apt update -y
+sudo apt install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo chmod 644 /var/www/html/index.nginx-debian.html
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") 
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/instance-id") 
+AVAILABILITY_ZONE=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/placement/availability-zone") 
+PUBLIC_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/public-ipv4")  
+sudo bash -c "cat > /var/www/html/index.nginx-debian.html <<EOF 
+<h1>Instance Details</h1> 
+<p><b>Instance ID:</b> $INSTANCE_ID</p> 
+<p><b>Availability Zone:</b> $AVAILABILITY_ZONE</p> 
+<p><b>Public IP:</b> $PUBLIC_IP</p> 
+EOF" 
+sudo systemctl reload nginx
+sudo systemctl restart nginx 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+#!/bin/bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install mysql-server -y
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo systemctl status mysql
+sudo ss -tap | grep mysql
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+#!/bin/bash
+#Installation of nginx service
+sudo yum update -y
+sudo amazon-linux-extras enable nginx1
+sudo yum install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo yum install git -y
+///////////////////////////////////////////////////////////////////////////////
+#!/bin/bash
+#enable the ports
+sudo yum update -y
+sudo yum install firewalld -y
+sudo systemctl enable firewalld
+sudo systemctl start firewalld
+sudo firewall-cmd --permanent --add-port=80/tcp
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --reload
+/////////////////////////////////////////////////////////////////////////////////////
+#!/bin/bash
+#check the service
+sudo systemctl status nginx
+sudo systemctl status firewalld
+sudo firewall-cmd --list-ports
+nginx -v
+git --version
+
+sudo chmod 644 /usr/share/nginx/html/index.html
+
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600") 
+
+INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/instance-id") 
+AVAILABILITY_ZONE=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/placement/availability-zone") 
+PUBLIC_IP=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" "http://169.254.169.254/latest/meta-data/public-ipv4") 
+
+
+# Create a simple HTML page displaying instance details 
+sudo bash -c "cat > /usr/share/nginx/html/index.html <<EOF 
+<h1>Instance Details</h1> 
+<p><b>Instance ID:</b> $INSTANCE_ID</p> 
+<p><b>Availability Zone:</b> $AVAILABILITY_ZONE</p> 
+<p><b>Public IP:</b> $PUBLIC_IP</p> 
+EOF" 
+
+sudo systemctl restart nginx 
+sudo yum update -y
+sudo yum install epel-release -y
+sudo yum install stress-ng -y
+
+
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
