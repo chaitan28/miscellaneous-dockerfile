@@ -1,0 +1,4 @@
+### Jenkins working slow
+cd /var/lib/jenkins
+# configure IP here
+vi jenkins.model.JenkinsLocationConfiguration.xml
