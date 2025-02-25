@@ -9,7 +9,7 @@ https://tahseer-notes.netlify.app/notes/aws%20solutions%20architect%20associate/
 ```
 ### AZURE TRAINING
 - varshini@codingsuperstar.com
-- www.codingsuperstar.com
+- https://codingsuperstars.com/
 ```sh
 https://drive.google.com/drive/folders/1J1JglO-sjSsvkWZ59VnL00JjFI9aLBeF
 ``` 
