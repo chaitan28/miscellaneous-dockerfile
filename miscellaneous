@@ -1,6 +1,0 @@
-### Jenkins working slow
-cd /var/lib/jenkins
-# configure IP here
-vi jenkins.model.JenkinsLocationConfiguration.xml
-##### AWS  SOLUTIONS ARCHITECH##
-https://tahseer-notes.netlify.app/notes/aws%20solutions%20architect%20associate/api%20gateway/
