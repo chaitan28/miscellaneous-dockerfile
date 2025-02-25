@@ -2,12 +2,12 @@
 ```sh
 cd /var/lib/jenkins
 vi jenkins.model.JenkinsLocationConfiguration.xml  # configure IP here
-``
-##### AWS  SOLUTIONS ARCHITECH
 ```
+### AWS  SOLUTIONS ARCHITECH
+```sh
 https://tahseer-notes.netlify.app/notes/aws%20solutions%20architect%20associate/api%20gateway/
 ```
-#### AZURE TRAINING
+### AZURE TRAINING
 - varshini@codingsuperstar.com
 - www.codingsuperstar.com
 ```sh
