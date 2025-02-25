@@ -8,7 +8,7 @@ vi jenkins.model.JenkinsLocationConfiguration.xml  # configure IP here
 https://tahseer-notes.netlify.app/notes/aws%20solutions%20architect%20associate/api%20gateway/
 ```
 ### AZURE TRAINING
-- varshini@codingsuperstar.com
+- varshini@codingsuperstars.com
 - https://codingsuperstars.com/
 ```sh
 https://drive.google.com/drive/folders/1J1JglO-sjSsvkWZ59VnL00JjFI9aLBeF
