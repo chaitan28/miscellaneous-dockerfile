@@ -25,7 +25,7 @@ Create a new policy (AccountA-S3-Access) with the following JSON:<br>
     ]
 }
 ```
-3. Attach this policy to the S3 bucket in Account A.<br>
+3. Attach this policy to the S3 bucket(permissions) in Account A.<br>
 
 ### Account B:
 1. Go to AWS IAM Console in Account B <br>
