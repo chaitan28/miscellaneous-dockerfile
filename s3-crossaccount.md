@@ -9,14 +9,17 @@ Create a new policy (AccountA-S3-Access) with the following JSON:<br>
     "Statement": [
         {
             "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::<536697257664>:root"
+            },
             "Action": [
                 "s3:GetObject",
                 "s3:ListBucket",
                 "s3:PutObject"
             ],
             "Resource": [
-                "arn:aws:s3:::whytebatl.com",
-                "arn:aws:s3:::whytebatl.com/*"
+                "arn:aws:s3:::<whytebatl.com>",
+                "arn:aws:s3:::<whytebatl.com>/*"
             ]
         }
     ]
@@ -39,8 +42,8 @@ Create a new policy (AccountA-S3-Access) with the following JSON:<br>
                 "s3:PutObject"
             ],
             "Resource": [
-                "arn:aws:s3:::whytebatl.com",
-                "arn:aws:s3:::whytebatl.com/*"
+                "arn:aws:s3:::<whytebatl.com>",
+                "arn:aws:s3:::<whytebatl.com>/*"
             ]
         }
     ]
