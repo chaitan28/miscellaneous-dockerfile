@@ -1,4 +1,5 @@
 /////////////////////////////////////////////////////////////
+# Azure virtual machine 
 #!/bin/bash
 
 echo "<h1>Server Details</h1>" | sudo tee /var/www/html/index.html
