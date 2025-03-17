@@ -1,3 +1,15 @@
+/////////////////////////////////////////////////////////////
+#!/bin/bash
+
+echo "<h1>Server Details</h1>" | sudo tee /var/www/html/index.html
+echo "<p><strong>Hostname:</strong> $(hostname)</p>" | sudo tee -a /var/www/html/index.html
+echo "<p><strong>Private IP:</strong> $(hostname -I | cut -d' ' -f1)</p>" | sudo tee -a /var/www/html/index.html
+echo "<p><strong>Public IP:</strong> $(curl -s ifconfig.me)</p>" | sudo tee -a /var/www/html/index.html
+echo "<p><strong>OS Version:</strong> $(lsb_release -d | cut -f2)</p>" | sudo tee -a /var/www/html/index.html
+echo "<p><strong>Uptime:</strong> $(uptime -p)</p>" | sudo tee -a /var/www/html/index.html
+
+sudo systemctl restart apache2
+
 ////////////////////////////////////////////////////////////
 #!/bin/bash
 
