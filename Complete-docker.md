@@ -173,7 +173,7 @@ Source Code= ./python1 <br>
 ### Dockerfile for Java Framework
 ```sh
 FROM openjdk:8-jdk-alpine  
-WORKDIR /appls
+WORKDIR /app
 COPY ./target/*.jar /app/app.jar
 CMD ["java", "-jar", "/app.jar"] 
 ```
