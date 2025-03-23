@@ -102,39 +102,43 @@ Hello world
 -  Use specific tags:                   Avoid latest to ensure predictable builds and compatibility. <br>
 -  Optimize image size:                 Use minimal base images and multi-stage builds to reduce the image footprint. <br>
 ```sh
-                    ## Mutlistage Dockerfile ###
-                         # stage1: Build 
-                          FROM schoolofdevops/maven:spring AS build
-                          workdir /app
-                          COPY ..
-                          RUN mvn spring-javaformat:apply && \ mvn package -Dskiptests
-                        # stage2: Deploy 
-                           FROM openjdk:8u201-jre-alpine3.9 AS Runtime
-                           WORKDIR /run
-                           COPY --from=build /app/target/*.jar /run/petclinic.jar
-                           EXPOSE 8080
-                           CMD ["java","-jar","petclinic.jar"]
+# Stage 1: Build Dependencies  
+FROM python:3.11-alpine AS build                  # Use lightweight Python 3.11 Alpine image  
+WORKDIR /app                                       # Set working directory inside the container  
+COPY requirements.txt .                            # Copy dependencies file to the container  
+RUN pip install --no-cache-dir -r requirements.txt  # Install dependencies without caching  
+
+# Stage 2: Production  
+FROM python:3.11-alpine                                #  Use a fresh Python 3.11 Alpine image for production  
+WORKDIR /app                                         # Set working directory inside the container  
+COPY --from=build /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages  # Copy installed dependencies  
+COPY . .                           # Copy application source code  
+CMD ["python", "app.py"]           # Run the application  
+
+
 ```
-- Explaination: <br>
-  . stage1:  This stage contains maven build tool which is responsible to generate the Jar File. use are using mvn package command to get the Jar file<br>
-  . stage2:  In copy, your copying jar file from build stage to the dest /run dir inside the container <br>
-              . if you observe the stage2 only contains the parent/base image nothing. which only responsible for image size.<br>
-              . The result of stage2 will be your dockerimage.<br>
+
 ```sh                                 
-                                        ## Mutlistage Dockerfile ###
-                                        # Stage 1: Build
-                                        FROM node:14 AS build
-                                        WORKDIR /usr/src/app
-                                        COPY package*.json ./
-                                        RUN npm install
-                                        COPY . .
-                                        RUN npm run build
-                                       # Stage 2: Production
-                                        FROM nginx:alpine AS Production 
-                                        COPY --from=build /usr/src/app/build /usr/share/nginx/html
-                                        EXPOSE 80
-                                        CMD ["nginx", "-g", "daemon off;"]
-  Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. This approach keeps the final image lean and efficient.
+                  # Stage 1: Build
+                  FROM node:18-alpine AS build  
+                  WORKDIR /usr/src/app  
+                  COPY package*.json ./  # Copy package files separately to leverage Docker cache  
+                  RUN npm ci --omit=dev    # Use 'ci' for deterministic installs and omit dev dependencies  
+                  COPY . .                # Copy the rest of the app files  
+                  RUN npm run build        # Build the application  
+
+                  # Stage 2: Production
+                  FROM nginx:alpine AS production  
+                  WORKDIR /usr/share/nginx/html  
+                  RUN rm -rf /etc/nginx/conf.d/default.conf          # Remove default nginx configuration  
+                  COPY nginx.conf /etc/nginx/conf.d/                 # Copy custom nginx configuration  
+                  COPY --from=build /usr/src/app/build .             # Copy built files from the build stage  
+                  RUN chmod -R 755 /usr/share/nginx/html \  
+                      && chown -R nginx:nginx /usr/share/nginx/html  # Set permissions to prevent unauthorized writes  
+                  EXPOSE 80  # Expose port 80  
+                  CMD ["nginx", "-g", "daemon off;"]                   # Start nginx  
+
+                    Explaination:  In this example, the first stage builds the application, and the second stage uses an Nginx server to serve the built application. This approach keeps the final image lean and efficient.
 ```
 -  Exclude unnecessary files:  Use .dockerignore to avoid sending unneeded files in the building the image.<br>
                                         Ignore Git-related files & log files  <br>
@@ -169,7 +173,7 @@ Source Code= ./python1 <br>
 ### Dockerfile for Java Framework
 ```sh
 FROM openjdk:8-jdk-alpine  
-WORKDIR /app
+WORKDIR /appls
 COPY ./target/*.jar /app/app.jar
 CMD ["java", "-jar", "/app.jar"] 
 ```
